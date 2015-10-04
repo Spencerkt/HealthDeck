@@ -9,13 +9,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
 import java.util.*;
 
 public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    ArrayList<Provider>providers = new ArrayList<Provider>();
+    ArrayList<Provider2>providers = new ArrayList<Provider2>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,21 +69,22 @@ public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoW
     }
 
     private void fillArray(){
-        Provider first = new Provider (37.789535, -122.416106, "Saint Francis Memorial Hospital");
+        Provider2 first = new Provider2 (37.789535, -122.416106, "Saint Francis Memorial Hospital");
         providers.add(first);
-        Provider second = new Provider (37.794520, -122.396816, "Drumm Medical Center");
+        Provider2 second = new Provider2 (37.794520, -122.396816, "Drumm Medical Center");
         providers.add(second);
-        Provider third = new Provider (37.769035, -122.433397, "California Pacific Medical Center Davies Campus ");
+        Provider2 third = new Provider2 (37.769035, -122.433397, "California Pacific Medical Center Davies Campus ");
         providers.add(third);
-        Provider fourth = new Provider (37.755434, -122.404316, "San Francisco General Hospital ");
+        Provider2 fourth = new Provider2 (37.755434, -122.404316, "San Francisco General Hospital ");
         providers.add(fourth);
-        Provider fifth = new Provider (37.782012, -122.441345, "Kaiser Permanente Medical Center ");
+        Provider2 fifth = new Provider2 (37.782012, -122.441345, "Kaiser Permanente Medical Center ");
         providers.add(fifth);
     }
 
     private void setLocations() {
-        for ( int i = 0; i < providers.size(); i++){
-            Provider current = providers.get(i);
+//        for ( int i = 0; i < providers.size(); i++){    // uncomment to run real program.
+        for ( int i = 0; i < 1; i++){
+            Provider2 current = providers.get(i);
             mMap.addMarker(new MarkerOptions().position(new LatLng(current.lat, current.lon)).title(current.companyName));
             mMap.setOnInfoWindowClickListener(this);
         }
@@ -92,12 +92,13 @@ public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoW
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+
         // is this working???
     }
 }
 
-
-class Provider {
+// just test code to get buttons working.
+class Provider2 {
 
     String companyName;
     String docName;
@@ -107,7 +108,7 @@ class Provider {
     double lat;
     double lon;
 
-    public Provider (double lat, double lon, String companyName) {
+    public Provider2 (double lat, double lon, String companyName) {
         this.lat = lat;
         this.lon = lon;
         this.companyName = companyName;
