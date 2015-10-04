@@ -8,7 +8,7 @@ import android.view.MenuItem;
     /*
     this class will take in a provider object through its message on the intent request.
     It will then display all the providers information in an orderly fasion, and possibly
-    allow for contact to be made with doctor.  
+    allow for contact to be made with doctor.
      */
 
 public class ProviderInfo extends AppCompatActivity {
