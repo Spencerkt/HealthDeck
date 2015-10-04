@@ -1,6 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="0dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
@@ -15,11 +17,45 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/smallburg"
-        android:src="@mipmap/smallburg"
+        android:id="@+id/ic_launcher"
+        android:src="@mipmap/ic_launcher"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:onClick="seeProfile"/>
+        android:onClick="seeProfile"
+        android:scaleType="fitCenter"
+        android:visibility="visible"
+        android:alpha="0.4"/>
 
+    <Button
+        style="@style/EmergencyCareButton"
+        android:layout_width="115dp"
+        android:layout_height="140dp"
+        android:layout_margin="10dp"
+        android:text="Emergency Care"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:onClick="redButton"/>
+
+    <Button
+        style="@style/BlueButton"
+        android:layout_width="115dp"
+        android:layout_height="140dp"
+        android:text="Family Physician"
+        android:id="@+id/button2"
+        android:layout_alignTop="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:onClick="blueButton"/>
+
+    <Button
+        style="@style/YellowButton"
+        android:layout_width="115dp"
+        android:layout_height="140dp"
+        android:layout_marginRight="10dp"
+        android:text="Counselor"
+        android:id="@+id/button3"
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignParentEnd="true"
+        android:onClick="yellowButton"/>
 
 </RelativeLayout>

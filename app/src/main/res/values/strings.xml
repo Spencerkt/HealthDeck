@@ -7,4 +7,10 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_user_menu">UserMenu</string>
     <string name="title_activity_provider_info">ProviderInfo</string>
+
+    <!-- Provider strings -->
+    <string name="provider_page">Provider info here</string>
+
+    <!-- Profile strings -->
+
 </resources>
