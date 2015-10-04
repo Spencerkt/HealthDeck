@@ -9,7 +9,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
 import java.util.*;
 
 public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener {
@@ -92,25 +91,26 @@ public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoW
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+
         // is this working???
     }
 }
 
 
-class Provider {
-
-    String companyName;
-    String docName;
-    String practice;
-    String title;
-    String Address;
-    double lat;
-    double lon;
-
-    public Provider (double lat, double lon, String companyName) {
-        this.lat = lat;
-        this.lon = lon;
-        this.companyName = companyName;
-    }
-
-}
+//class Provider {
+//
+//    String companyName;
+//    String docName;
+//    String practice;
+//    String title;
+//    String Address;
+//    double lat;
+//    double lon;
+//
+//    public Provider (double lat, double lon, String companyName) {
+//        this.lat = lat;
+//        this.lon = lon;
+//        this.companyName = companyName;
+//    }
+//
+//}
