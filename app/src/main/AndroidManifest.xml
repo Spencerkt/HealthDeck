@@ -40,6 +40,15 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <activity
+            android:name=".UserMenu"
+            android:label="@string/title_activity_user_menu" >
+        </activity>
+        <activity
+            android:name=".ProviderInfo"
+            android:label="@string/title_activity_provider_info" >
+        </activity>
     </application>
 
 </manifest>
