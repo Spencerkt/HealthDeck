@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">HealthDeck</string>
     <string name="title_activity_map_background">Map</string>
+    <string name="title_activity_better_doctor">BetterDoctorAct</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>
