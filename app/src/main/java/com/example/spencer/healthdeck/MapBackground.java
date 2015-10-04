@@ -3,6 +3,7 @@ package com.example.spencer.healthdeck;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -70,12 +71,7 @@ public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoW
         return family;
     }
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
+    // Not used
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
@@ -89,10 +85,12 @@ public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoW
     }
 
     public void onInfoWindowClick(Marker marker) {
-//        Class cls = allMarkersMap.get(marker);
         Intent providerPage = new Intent(this, ProviderInfo.class);
         startActivity(providerPage);
     }
 
-
+    public void seeProfile(View view) {
+        Intent profilePage = new Intent(this, UserMenu.class);
+        startActivity(profilePage);
+    }
 }
