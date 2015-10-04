@@ -1,5 +1,25 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:id="@+id/map" tools:context=".MapBackground"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    tools:layout="@layout/abc_screen_simple" />
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    tools:context="0dp">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:id="@+id/map" tools:context=".MapBackground"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        tools:layout="@layout/abc_screen_simple" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/smallburg"
+        android:src="@mipmap/smallburg"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:onClick="seeProfile"/>
+
+
+</RelativeLayout>

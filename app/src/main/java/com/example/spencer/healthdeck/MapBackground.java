@@ -93,4 +93,5 @@ public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoW
         Intent profilePage = new Intent(this, UserMenu.class);
         startActivity(profilePage);
     }
+
 }
