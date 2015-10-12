@@ -1,7 +1,9 @@
 package com.example.spencer.healthdeck;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -9,17 +11,23 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.*;
+import java.util.ArrayList;
+
+// This class populates the map with all the doctors information. 
 
 public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    ArrayList<Provider2>providers = new ArrayList<Provider2>();
+    DataFarm data = new DataFarm();
+    ArrayList<Provider> counselors, family, emergency;
+    ArrayList<Marker> markers;
+    boolean fam = false, couns = false, emer = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_background);
+        fillArrays();
         setUpMapIfNeeded();
     }
 
@@ -28,6 +36,7 @@ public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoW
         super.onResume();
         setUpMapIfNeeded();
     }
+
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
@@ -52,66 +61,113 @@ public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoW
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                fillArray();
-                setLocations();  // change to setLocations();
+                setDefualt();
+                markers = makeMarkers( getCurrentDisplay() );
             }
         }
     }
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
+    private void setDefualt(){ fam = true; }
+
+    private void fillArrays(){
+        counselors = data.getCounselors();
+        family = data.getFamily();
+        emergency = data.getER();
+    }
+
+    private ArrayList<Provider> getCurrentDisplay(){
+        if ( fam )
+            return family;
+        if ( couns )
+            return family;
+        if ( emer )
+            return emergency;
+        else
+            return family;              // Do I want to do that?
+    }
+
+    // Not used
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 
-    private void fillArray(){
-        Provider2 first = new Provider2 (37.789535, -122.416106, "Saint Francis Memorial Hospital");
-        providers.add(first);
-        Provider2 second = new Provider2 (37.794520, -122.396816, "Drumm Medical Center");
-        providers.add(second);
-        Provider2 third = new Provider2 (37.769035, -122.433397, "California Pacific Medical Center Davies Campus ");
-        providers.add(third);
-        Provider2 fourth = new Provider2 (37.755434, -122.404316, "San Francisco General Hospital ");
-        providers.add(fourth);
-        Provider2 fifth = new Provider2 (37.782012, -122.441345, "Kaiser Permanente Medical Center ");
-        providers.add(fifth);
+
+    private ArrayList<Marker> makeMarkers(ArrayList<Provider> input){
+        ArrayList<Marker> marks = new ArrayList<>();
+
+        for (int i = 0; i < input.size(); i++){
+            marks.add(mMap.addMarker(new MarkerOptions().position(new LatLng(input.get(i).lat,
+                    input.get(i).lon)).title(input.get(i).docName).snippet(input.get(i).practice)));
+            mMap.setOnInfoWindowClickListener(this);
+        }
+        return marks;
     }
 
-    private void setLocations() {
-//        for ( int i = 0; i < providers.size(); i++){    // uncomment to run real program.
-        for ( int i = 0; i < 1; i++){
-            Provider2 current = providers.get(i);
-            mMap.addMarker(new MarkerOptions().position(new LatLng(current.lat, current.lon)).title(current.companyName));
-            mMap.setOnInfoWindowClickListener(this);
+
+    public void onInfoWindowClick(Marker marker) {
+        Intent providerPage = new Intent(this, ProviderInfo.class);
+        startActivity(providerPage);
+    }
+
+    public void seeProfile(View view) {
+        Intent profilePage = new Intent(this, UserMenu.class);
+        startActivity(profilePage);
+    }
+
+
+    public void redButton(View view){
+        if ( emer )
+            return;
+        if ( fam )
+            fam = false;
+            setToFalse(markers);
+        if ( couns )
+            couns = false;
+            setToFalse(markers);
+
+        reMap(emergency);
+    }
+
+    public void blueButton(View view){
+        if ( fam )
+            return;
+        if ( emer )
+            emer = false;
+        setToFalse(markers);
+        if ( couns )
+            couns = false;
+        setToFalse(markers);
+
+        reMap(family);
+    }
+
+    public void yellowButton(View view){
+        if ( couns )
+            return;
+        if ( fam )
+            fam = false;
+        setToFalse(markers);
+        if ( emer )
+            emer = false;
+        setToFalse(markers);
+
+        reMap(counselors);
+    }
+
+    private void setToFalse(ArrayList<Marker> currentMarks){
+        for (int i = 0; i < currentMarks.size(); i++){
+            currentMarks.get(i).setVisible(false);
         }
     }
 
-    @Override
-    public void onInfoWindowClick(Marker marker) {
+    private void reMap(ArrayList<Provider> currentMarks){
+        markers = new ArrayList<>();
 
-        // is this working???
-    }
-}
-
-// just test code to get buttons working.
-class Provider2 {
-
-    String companyName;
-    String docName;
-    String practice;
-    String title;
-    String Address;
-    double lat;
-    double lon;
-
-    public Provider2 (double lat, double lon, String companyName) {
-        this.lat = lat;
-        this.lon = lon;
-        this.companyName = companyName;
+        for (int i = 0; i < currentMarks.size(); i++){
+            markers.add(mMap.addMarker(new MarkerOptions().position(new LatLng(currentMarks.get(i).lat,
+                    currentMarks.get(i).lon)).title(currentMarks.get(i).docName).snippet(currentMarks.get(i).practice)));
+            mMap.setOnInfoWindowClickListener(this);
+        }
     }
 
 }
