@@ -13,6 +13,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+// This class populates the map with all the doctors information. 
+
 public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -167,6 +169,5 @@ public class MapBackground extends FragmentActivity implements GoogleMap.OnInfoW
             mMap.setOnInfoWindowClickListener(this);
         }
     }
-
 
 }
